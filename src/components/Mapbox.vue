@@ -1,6 +1,7 @@
 <template>
   <div class="map">
-    <p>HOLA IRENE</p>
+    <button @click="selectLayer01">Spain</button>
+    <button @click="selectLayer02">France</button>
     <div id="map"></div>
     <div></div>
   </div>
@@ -8,6 +9,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 import mapboxgl from "mapbox-gl";
 
 export default defineComponent({
@@ -19,14 +21,18 @@ export default defineComponent({
     };
   },
 
+  computed: {
+    ...mapState(["users"]),
+  },
+
   methods: {
     async getMap() {
       mapboxgl.accessToken = this.access_token;
       const map = new mapboxgl.Map({
-        container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [-4, 40], // starting position [lng, lat]
-        zoom: 2, // starting zoom
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [-4, 40],
+        zoom: 2,
       });
       map.on("load", () => {
         new mapboxgl.Marker({ color: "red" })
@@ -35,6 +41,14 @@ export default defineComponent({
         new mapboxgl.Marker({ color: "blue" })
           .setLngLat([2.335092, 48.8612])
           .addTo(map);
+
+        this.users.forEach((user) => {
+          const data = `<h3>${user.name}</h3><p>Id:${user.id}</p><p>Longitud: ${user.coordinates.lng}</p><p>Latitud: ${user.coordinates.lat}</p>`;
+          new mapboxgl.Marker({ color: "yellow" })
+            .setLngLat([user.coordinates.lng, user.coordinates.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(data))
+            .addTo(map);
+        });
 
         map.addSource("spain", {
           type: "geojson",
@@ -61,7 +75,7 @@ export default defineComponent({
           type: "fill",
           source: "france",
           layout: {
-            visibility: "none",
+            visibility: "visible",
           },
           paint: {
             "fill-color": "rgba(251, 135, 20, 0.8)",
