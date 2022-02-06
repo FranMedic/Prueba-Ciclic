@@ -29,6 +29,13 @@ export default defineComponent({
         zoom: 2, // starting zoom
       });
       map.on("load", () => {
+        new mapboxgl.Marker({ color: "red" })
+          .setLngLat([2.171389, 41.387944])
+          .addTo(map);
+        new mapboxgl.Marker({ color: "blue" })
+          .setLngLat([2.335092, 48.8612])
+          .addTo(map);
+
         map.addSource("spain", {
           type: "geojson",
           data: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/ESP.geo.json",
