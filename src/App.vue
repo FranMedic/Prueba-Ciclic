@@ -15,8 +15,7 @@ export default defineComponent({
   font-family: "Amatic SC", cursive;
   font-family: "Fuzzy Bubbles", cursive;
   font-family: "Supermercado One", cursive;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
   text-align: center;
   color: #2c3e50;
 }
