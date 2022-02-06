@@ -8,6 +8,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 import mapboxgl from "mapbox-gl";
 
 export default defineComponent({
@@ -17,6 +18,10 @@ export default defineComponent({
     return {
       access_token: process.env.VUE_APP_ACCESS_TOKEN,
     };
+  },
+
+  computed: {
+    ...mapState(["users"]),
   },
 
   methods: {
@@ -35,6 +40,14 @@ export default defineComponent({
         new mapboxgl.Marker({ color: "blue" })
           .setLngLat([2.335092, 48.8612])
           .addTo(map);
+
+        this.users.forEach((user) => {
+          const data = `<h3>${user.name}</h3><p>Id:${user.id}</p><p>Longitud: ${user.coordinates.lng}</p><p>Latitud: ${user.coordinates.lat}</p>`;
+          new mapboxgl.Marker({ color: "yellow" })
+            .setLngLat([user.coordinates.lng, user.coordinates.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(data))
+            .addTo(map);
+        });
 
         map.addSource("spain", {
           type: "geojson",
