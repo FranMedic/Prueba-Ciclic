@@ -2,6 +2,7 @@
   <div class="map">
     <p>HOLA IRENE</p>
     <div id="map"></div>
+    <div></div>
   </div>
 </template>
 
@@ -24,10 +25,42 @@ export default defineComponent({
       const map = new mapboxgl.Map({
         container: "map", // container ID
         style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [-74.5, 40], // starting position [lng, lat]
-        zoom: 9, // starting zoom
+        center: [-4, 40], // starting position [lng, lat]
+        zoom: 2, // starting zoom
       });
-      map.on("load", () => {});
+      map.on("load", () => {
+        map.addSource("spain", {
+          type: "geojson",
+          data: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/ESP.geo.json",
+        });
+        map.addSource("france", {
+          type: "geojson",
+          data: "https://raw.githubusercontent.com/johan/world.geo.json/master/countries/FRA.geo.json",
+        });
+
+        map.addLayer({
+          id: "layer01",
+          type: "fill",
+          source: "spain",
+          layout: {
+            visibility: "visible",
+          },
+          paint: {
+            "fill-color": "rgba(130, 230, 251, 0.8)",
+          },
+        });
+        map.addLayer({
+          id: "layer02",
+          type: "fill",
+          source: "france",
+          layout: {
+            visibility: "none",
+          },
+          paint: {
+            "fill-color": "rgba(251, 135, 20, 0.8)",
+          },
+        });
+      });
     },
   },
 
