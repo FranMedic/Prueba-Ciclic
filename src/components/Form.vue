@@ -48,7 +48,7 @@
         />
       </div>
       <div class="form_coordinates">
-        <h2>Coordenates</h2>
+        <h2>Coordinates</h2>
         <label for="longitude" class="form__longitude--label"
           >Longitude:
         </label>
