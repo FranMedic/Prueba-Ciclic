@@ -1,17 +1,12 @@
 <template>
-  <Menu />
   <router-view />
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import Menu from "@/components/Menu.vue";
 
 export default defineComponent({
   name: "app",
-  components: {
-    Menu,
-  },
 });
 </script>
 
