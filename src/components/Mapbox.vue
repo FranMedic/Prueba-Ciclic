@@ -112,6 +112,8 @@ export default defineComponent({
   margin-top: 25px;
   border: 3px solid #2c3e50;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
 }
 .button-home {
   width: 80px;

@@ -17,7 +17,6 @@ export default defineComponent({
 
 <style scoped>
 .menu {
-  width: 100vw;
   height: 30px;
   display: flex;
   justify-content: center;
