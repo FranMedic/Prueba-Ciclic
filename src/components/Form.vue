@@ -97,7 +97,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["title"]),
+    ...mapState(["title", "users"]),
   },
 
   methods: {
@@ -121,6 +121,7 @@ export default defineComponent({
         this.longitude > -90
       ) {
         const newUser = {
+          id: this.users.length + 1,
           name: this.name,
           coordinates: {
             lng: this.longitude,

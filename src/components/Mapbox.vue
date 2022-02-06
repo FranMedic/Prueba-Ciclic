@@ -1,6 +1,7 @@
 <template>
   <div class="map">
-    <p>HOLA IRENE</p>
+    <button @click="selectLayer01">Spain</button>
+    <button @click="selectLayer02">France</button>
     <div id="map"></div>
     <div></div>
   </div>
@@ -28,10 +29,10 @@ export default defineComponent({
     async getMap() {
       mapboxgl.accessToken = this.access_token;
       const map = new mapboxgl.Map({
-        container: "map", // container ID
-        style: "mapbox://styles/mapbox/streets-v11", // style URL
-        center: [-4, 40], // starting position [lng, lat]
-        zoom: 2, // starting zoom
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [-4, 40],
+        zoom: 2,
       });
       map.on("load", () => {
         new mapboxgl.Marker({ color: "red" })
@@ -74,7 +75,7 @@ export default defineComponent({
           type: "fill",
           source: "france",
           layout: {
-            visibility: "none",
+            visibility: "visible",
           },
           paint: {
             "fill-color": "rgba(251, 135, 20, 0.8)",
