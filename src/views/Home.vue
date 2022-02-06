@@ -1,7 +1,7 @@
 <template>
   <Menu />
   <div class="home">
-    <h1>{{ this.title }}</h1>
+    <h1 class="home-title">{{ this.title }}</h1>
     <h2>Explore the map, or create your own marks</h2>
     <div class="map">
       <Mapbox />
@@ -26,3 +26,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.home-title {
+  font-size: 40px;
+}
+</style>
